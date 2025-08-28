@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Горные Травы - Природная Аптека</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mountain-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #065f46 50%, #166534 100%);
+        }
+        
+        .herb-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .herb-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.3);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .mountain-silhouette {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300'%3E%3Cpath d='M0,300 L0,200 L200,100 L400,150 L600,50 L800,120 L1000,80 L1200,140 L1200,300 Z' fill='%23065f46' opacity='0.6'/%3E%3C/svg%3E") no-repeat center bottom;
+            background-size: cover;
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .recipe-modal {
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        
+        .recipe-modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 min-h-screen">
+    <!-- Header -->
+    <header class="mountain-bg mountain-silhouette relative overflow-hidden">
+        <div class="container mx-auto px-6 py-16 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 floating">
+                    🏔️ Горные Травы
+                </h1>
+                <p class="text-xl md:text-2xl text-green-100 mb-8">
+                    Природная аптека в ваших руках
+                </p>
+                <button onclick="scrollToSection('herbs')" class="bg-green-500 hover:bg-green-400 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 glow-effect">
+                    Изучить травы 🌿
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-green-800/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-center space-x-8">
+                <button onclick="scrollToSection('herbs')" class="text-white hover:text-green-300 transition-colors duration-300 font-medium">
+                    Травы
+                </button>
+                <button onclick="scrollToSection('benefits')" class="text-white hover:text-green-300 transition-colors duration-300 font-medium">
+                    Польза
+                </button>
+                <button onclick="scrollToSection('recipes')" class="text-white hover:text-green-300 transition-colors duration-300 font-medium">
+                    Рецепты
+                </button>
+                <button onclick="scrollToSection('guide')" class="text-white hover:text-green-300 transition-colors duration-300 font-medium">
+                    Гид
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Herbs Section -->
+    <section id="herbs" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">
+                🌿 Полезные Горные Травы
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Herb Card 1 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🌱</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Мята горная</h3>
+                    <p class="text-green-100 mb-4">Успокаивает нервную систему, улучшает пищеварение, обладает антисептическими свойствами.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Чай для релаксации</li>
+                            <li>• Настойка от головной боли</li>
+                            <li>• Ароматерапия</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('mint')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+
+                <!-- Herb Card 2 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🥜</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Орех</h3>
+                    <p class="text-green-100 mb-4">полезный и питательный продукт. Благотворно влияет на мозг, сердце и укрепляет иммунитет.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Орехи можно есть в сыром виде</li>
+                            <li>• добавлять в салаты</li>
+                            <li>• десерты</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('hypericum')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+
+                <!-- Herb Card 3 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🍇</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Смородина</h3>
+                    <p class="text-green-100 mb-4">ягода, богатая витаминами. Бывает чёрная, красная и белая.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Употребляется в свежем виде  </li>
+                            <li>• Используется для приготовления компотов, соков, варенья</li>
+                            <li>• В сушёном виде заваривается как чай  
+</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('thyme')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+
+                <!-- Herb Card 4 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🌺</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Ромашка альпийская</h3>
+                    <p class="text-green-100 mb-4">Противовоспалительное, успокаивающее, помогает при проблемах с кожей.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Успокаивающий чай</li>
+                            <li>• Компрессы для кожи</li>
+                            <li>• Ванны для релаксации</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('chamomile')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+
+                <!-- Herb Card 5 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🍓</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Малина</h3>
+                    <p class="text-green-100 mb-4"> вкусная и полезная ягода. Богата витаминами, органическими кислотами и антиоксидантами.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Её едят свежей или готовят компоты, варенье, чай </li>
+                            <li>• Снижает температуру тела</li>
+                            <li>• Можно сушить и заваривать как чай  
+</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('plantain')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+
+                <!-- Herb Card 6 -->
+                <div class="herb-card bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <div class="text-6xl mb-4 text-center">🌿</div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Шалфей</h3>
+                    <p class="text-green-100 mb-4">Антибактериальное, улучшает память, помогает при воспалениях горла.</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="text-green-300 font-medium">Применение:</div>
+                        <ul class="text-green-100 text-sm space-y-1">
+                            <li>• Полоскания при ангине</li>
+                            <li>• Чай для памяти</li>
+                            <li>• Ингаляции при простуде</li>
+                        </ul>
+                    </div>
+                    <button onclick="showRecipe('sage')" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Рецепты приготовления
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 px-6 bg-green-900/50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">
+                ✨ Польза Горных Трав
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-green-800/30 rounded-xl backdrop-blur-md">
+                    <div class="text-5xl mb-4">💚</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Натуральность</h3>
+                    <p class="text-green-100">100% природные компоненты без химических добавок</p>
+                </div>
+                <div class="text-center p-6 bg-green-800/30 rounded-xl backdrop-blur-md">
+                    <div class="text-5xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Безопасность</h3>
+                    <p class="text-green-100">Мягкое воздействие на организм без побочных эффектов</p>
+                </div>
+                <div class="text-center p-6 bg-green-800/30 rounded-xl backdrop-blur-md">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Эффективность</h3>
+                    <p class="text-green-100">Проверенные веками методы лечения и профилактики</p>
+                </div>
+                <div class="text-center p-6 bg-green-800/30 rounded-xl backdrop-blur-md">
+                    <div class="text-5xl mb-4">🌱</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Доступность</h3>
+                    <p class="text-green-100">Легко найти и заготовить в горных регионах</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipes Section -->
+    <section id="recipes" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">
+                📖 Популярные Рецепты
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <h3 class="text-2xl font-semibold text-white mb-4">🍵 Успокаивающий чай</h3>
+                    <p class="text-green-100 mb-4">Смесь мяты, ромашки и мелиссы для крепкого сна</p>
+                    <button onclick="showDetailedRecipe('calming-tea')" class="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Подробный рецепт
+                    </button>
+                </div>
+                <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <h3 class="text-2xl font-semibold text-white mb-4">🌿 Заживляющая мазь</h3>
+                    <p class="text-green-100 mb-4">На основе зверобоя и подорожника для быстрого заживления</p>
+                    <button onclick="showDetailedRecipe('healing-ointment')" class="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Подробный рецепт
+                    </button>
+                </div>
+                <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                    <h3 class="text-2xl font-semibold text-white mb-4">💨 Ингаляция от простуды</h3>
+                    <p class="text-green-100 mb-4">Смесь чабреца и шалфея для лечения дыхательных путей</p>
+                    <button onclick="showDetailedRecipe('cold-inhalation')" class="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+                        Подробный рецепт
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guide" class="py-16 px-6 bg-green-900/50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">
+                🗺️ Гид по Сбору Трав
+            </h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                        <h3 class="text-2xl font-semibold text-white mb-4">⏰ Когда собирать</h3>
+                        <ul class="text-green-100 space-y-2">
+                            <li>• Утром после высыхания росы</li>
+                            <li>• В сухую погоду</li>
+                            <li>• В период цветения для большинства трав</li>
+                            <li>• Корни - осенью или ранней весной</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                        <h3 class="text-2xl font-semibold text-white mb-4">📍 Где искать</h3>
+                        <ul class="text-green-100 space-y-2">
+                            <li><a href="nn.html">• Арсланбаб</a></li>
+                            <li><a href="nn.html">• Кара-Кой</a></li>
+                            <li><a href="nn.html">• Сары-Челек</a></li>
+                            <li><a href="nn.html">• Сары-Ой</a></li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                        <h3 class="text-2xl font-semibold text-white mb-4">✂️ Как собирать</h3>
+                        <ul class="text-green-100 space-y-2">
+                            <li>• Используйте острый нож или ножницы</li>
+                            <li>• Не вырывайте с корнем</li>
+                            <li>• Оставляйте часть растений для размножения</li>
+                            <li>• Собирайте в корзины или тканевые мешки</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-800/40 backdrop-blur-md rounded-2xl p-6 border border-green-600/30">
+                        <h3 class="text-2xl font-semibold text-white mb-4">🏠 Как сушить</h3>
+                        <ul class="text-green-100 space-y-2">
+                            <li>• В тени, в проветриваемом месте</li>
+                            <li>• Разложить тонким слоем</li>
+                            <li>• Переворачивать каждые 2-3 дня</li>
+                            <li>• Хранить в стеклянных банках</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 py-8 px-6">
+        <div class="container mx-auto text-center">
+            <p class="text-green-100 mb-4">
+                🌿 Горные Травы - ваш путь к здоровью через природу
+            </p>
+            <p class="text-green-300 text-sm">
+                Помните: перед применением любых трав проконсультируйтесь с врачом
+            </p>
+        </div>
+    </footer>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="recipe-modal fixed inset-0 bg-black/50 items-center justify-center z-50 p-4">
+        <div class="bg-green-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-white"></h3>
+                    <button onclick="closeModal()" class="text-white hover:text-green-300 text-2xl">×</button>
+                </div>
+                <div id="modalContent" class="text-green-100"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function showRecipe(herbType) {
+            const modal = document.getElementById('recipeModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const recipes = {
+                mint: {
+                    title: '🌱 Рецепты с мятой горной',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Успокаивающий чай</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>2 ч.л. сушеной мяты</li>
+                                    <li>250 мл кипятка</li>
+                                    <li>Мед по вкусу</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Залить мяту кипятком, настоять 10 минут, добавить мед.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Настойка от головной боли</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>50 г свежей мяты</li>
+                                    <li>500 мл водки</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настаивать 2 недели в темном месте. Принимать по 20 капель при головной боли.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                hypericum: {
+                    title: '🌿 Рецепты со зверобоем',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Масло зверобоя</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>100 г свежих цветков зверобоя</li>
+                                    <li>500 мл оливкового масла</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настаивать на солнце 3 недели до красного цвета. Применять для заживления ран.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Чай от депрессии</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>1 ч.л. сушеного зверобоя</li>
+                                    <li>200 мл кипятка</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Заварить, настоять 15 минут. Пить 2-3 раза в день курсом 3 недели.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                thyme: {
+                    title: '🍃 Рецепты с чабрецом',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Отвар от кашля</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>2 ст.л. сушеного чабреца</li>
+                                    <li>500 мл воды</li>
+                                    <li>Мед по вкусу</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Кипятить 10 минут, настоять 30 минут. Пить по 100 мл 3 раза в день.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Ингаляция при простуде</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>3 ст.л. чабреца</li>
+                                    <li>1 л кипятка</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Залить кипятком, дышать паром 10-15 минут под полотенцем.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                chamomile: {
+                    title: '🌺 Рецепты с ромашкой',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Успокаивающий чай</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>1 ст.л. цветков ромашки</li>
+                                    <li>250 мл кипятка</li>
+                                    <li>Мед по вкусу</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настоять 15 минут, процедить. Пить перед сном.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Компресс для кожи</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>2 ст.л. ромашки</li>
+                                    <li>300 мл кипятка</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настоять 30 минут. Смочить марлю и прикладывать к проблемным участкам кожи.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                plantain: {
+                    title: '🌾 Рецепты с подорожником',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Свежий сок при ранах</h4>
+                                <p class="mb-2"><strong>Применение:</strong></p>
+                                <p>Промыть свежие листья, размять до появления сока и приложить к ране. Менять каждые 2-3 часа.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Отвар для полосканий</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>2 ст.л. сушеных листьев</li>
+                                    <li>400 мл воды</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Кипятить 10 минут, настоять 1 час. Полоскать рот и горло 3-4 раза в день.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                sage: {
+                    title: '🌿 Рецепты с шалфеем',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Полоскание при ангине</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>1 ст.л. листьев шалфея</li>
+                                    <li>250 мл кипятка</li>
+                                    <li>Щепотка соли</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настоять 20 минут, добавить соль. Полоскать горло каждые 2 часа.</p>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2">Чай для улучшения памяти</h4>
+                                <p class="mb-2"><strong>Ингредиенты:</strong></p>
+                                <ul class="list-disc list-inside mb-3">
+                                    <li>1 ч.л. сушеного шалфея</li>
+                                    <li>200 мл кипятка</li>
+                                </ul>
+                                <p><strong>Приготовление:</strong> Настоять 10 минут. Пить по чашке утром и вечером.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            title.textContent = recipes[herbType].title;
+            content.innerHTML = recipes[herbType].content;
+            modal.classList.add('active');
+        }
+
+        function showDetailedRecipe(recipeType) {
+            const modal = document.getElementById('recipeModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const detailedRecipes = {
+                'calming-tea': {
+                    title: '🍵 Успокаивающий чай',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Ингредиенты:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>2 ч.л. сушеной мяты</li>
+                                    <li>1 ч.л. цветков ромашки</li>
+                                    <li>1 ч.л. мелиссы</li>
+                                    <li>500 мл кипятка</li>
+                                    <li>Мед по вкусу</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Приготовление:</h4>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>Смешать все травы в заварочном чайнике</li>
+                                    <li>Залить кипятком и накрыть крышкой</li>
+                                    <li>Настаивать 15-20 минут</li>
+                                    <li>Процедить и добавить мед</li>
+                                    <li>Пить теплым за час до сна</li>
+                                </ol>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Эффект:</h4>
+                                <p>Успокаивает нервную систему, улучшает качество сна, снимает стресс и напряжение.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                'healing-ointment': {
+                    title: '🌿 Заживляющая мазь',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Ингредиенты:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>50 г свежих листьев подорожника</li>
+                                    <li>30 г цветков зверобоя</li>
+                                    <li>100 г вазелина или свиного жира</li>
+                                    <li>10 мл масла календулы</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Приготовление:</h4>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>Измельчить травы в мясорубке</li>
+                                    <li>Смешать с растопленным жиром</li>
+                                    <li>Томить на водяной бане 2 часа</li>
+                                    <li>Процедить через марлю</li>
+                                    <li>Добавить масло календулы</li>
+                                    <li>Хранить в холодильнике до 6 месяцев</li>
+                                </ol>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Применение:</h4>
+                                <p>Наносить тонким слоем на чистые раны, порезы, ссадины 2-3 раза в день. Ускоряет заживление и предотвращает инфекции.</p>
+                            </div>
+                        </div>
+                    `
+                },
+                'cold-inhalation': {
+                    title: '💨 Ингаляция от простуды',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Ингредиенты:</h4>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>2 ст.л. сушеного чабреца</li>
+                                    <li>1 ст.л. листьев шалфея</li>
+                                    <li>1 ст.л. цветков ромашки</li>
+                                    <li>1 л кипятка</li>
+                                    <li>2-3 капли эфирного масла эвкалипта (по желанию)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Приготовление:</h4>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>Смешать все травы в широкой миске</li>
+                                    <li>Залить крутым кипятком</li>
+                                    <li>Добавить эфирное масло</li>
+                                    <li>Накрыться полотенцем над миской</li>
+                                    <li>Дышать паром 10-15 минут</li>
+                                    <li>Повторять 2-3 раза в день</li>
+                                </ol>
+                            </div>
+                            <div class="bg-green-700/50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-3">Эффект:</h4>
+                                <p>Очищает дыхательные пути, снимает воспаление, облегчает кашель и заложенность носа.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            title.textContent = detailedRecipes[recipeType].title;
+            content.innerHTML = detailedRecipes[recipeType].content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('recipeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Add smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add floating animation to cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all herb cards
+            document.querySelectorAll('.herb-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ed826583773534',t:'MTc1NTE0MzY1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

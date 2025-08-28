@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Арланбаб</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #c7ffcd);
+      color: #333;
+    }
+
+    header {
+      background-color: #42ff58;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .catalog {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card {
+      background-color: #ddffe1;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+      color: #03b300;
+    }
+
+    .card p {
+      color: #777;
+      font-size: 16px;
+    }
+
+    .card button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #07e42c;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card button:hover {
+      background-color: #048b1b;
+    }
+	header {
+      background-color: #42ff58;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .catalog1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card1 {
+      background-color: #ddffe1;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card1:hover {
+      transform: translateY(-5px);
+    }
+
+    .card1 img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card1 h3 {
+      margin: 15px 0 10px;
+      color: #03b300;
+    }
+
+    .card1 p {
+      color: #777;
+      font-size: 16px;
+    }
+
+    .card1 button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #07e42c;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card1 button:hover {
+      background-color: #048b1b;
+    }
+	header {
+      background-color: #42ff58;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .catalog2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card2 {
+      background-color: #ddffe1;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card2:hover {
+      transform: translateY(-5px);
+    }
+
+    .card2 img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card2 h3 {
+      margin: 15px 0 10px;
+      color: #03b300;
+    }
+
+    .card2 p {
+      color: #777;
+      font-size: 16px;
+    }
+
+    .card2 button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #07e42c;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card2 button:hover {
+      background-color: #048b1b;
+    }
+	 header {
+      background-color: #42ff58;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .catalog3 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .card3 {
+      background-color: #ddffe1;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card3:hover {
+      transform: translateY(-5px);
+    }
+
+    .card3 img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card3 h3 {
+      margin: 15px 0 10px;
+      color: #03b300;
+    }
+
+    .card3 p {
+      color: #777;
+      font-size: 16px;
+    }
+
+    .card3 button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #07e42c;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card3 button:hover {
+      background-color: #048b1b;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Арсланбаб</header>
+
+  <section class="catalog">
+    <div class="card">
+      <img src="ромаш.webp" alt="Платье">
+      <h3>Мята горная</h3>
+      <p>ароматное лечебное растение. Полезна для пищеварения и дыхательных органов, успокаивает.
+</p>
+      <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card">
+      <img src="smorod.webp" alt="Куртка">
+      <h3>Смородина</h3>
+      <p>Смородина – полезная, вкусная ягода, укрепляет иммунитет.</p>
+      <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card">
+      <img src="ромашка.webp" alt="Футболка">
+      <h3>Ромашка альпийская</h3>
+      <p>обладает лечебными свойствами, успокаивает и противовоспалительна.
+</p>
+      <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card">
+      <img src="malina.webp" alt="Юбка">
+      <h3>Малина</h3>
+      <p>Малина — вкусная ягода с полезными свойствами</p>
+      <button><a href="ars.html">Купить</a></button>
+    </div>
+  </section>
+<header>Кара-Кой</header>
+
+  <section class="catalog1">
+    <div class="card1">
+      <img src="ромаш.webp" alt="Платье">
+      <h3>Мята горная</h3>
+      <p>ароматное лечебное растение. Полезна для пищеварения и дыхательных органов, успокаивает.
+</p>
+  <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card1">
+      <img src="орех.webp" alt="Куртка">
+      <h3>Орех</h3>
+      <p> орех — полезный, маслянистый плод, полезен для здоровья.</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card1">
+      <img src="ромашка.webp" alt="Футболка">
+      <h3>Ромашка альпийская</h3>
+      <p>обладает лечебными свойствами, успокаивает и противовоспалительна.
+</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card1">
+      <img src="malina.webp" alt="Юбка">
+      <h3>Малина</h3>
+      <p>Малина — вкусная ягода с полезными свойствами</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+  </section>
+  <header>Сары-Челек</header>
+
+  <section class="catalog2">
+    <div class="card2">
+      <img src="ромаш.webp" alt="Платье">
+      <h3>Мята горная</h3>
+      <p>ароматное лечебное растение. Полезна для пищеварения и дыхательных органов, успокаивает.
+</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card2">
+      <img src="smorod.webp" alt="Куртка">
+      <h3>Смородина</h3>
+      <p>Смородина – полезная, вкусная ягода, укрепляет иммунитет.</p>
+       <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card2">
+      <img src="ромашка.webp" alt="Футболка">
+      <h3>Ромашка альпийская</h3>
+      <p>обладает лечебными свойствами, успокаивает и противовоспалительна.
+</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card2">
+      <img src="шалфей.webp" alt="Юбка">
+      <h3>шалфей</h3>
+      <p>лекарственное растение, полезное при кашле и боли в горле.</p>
+       <button><a href="ars.html">Купить</a></button>
+    </div>
+  </section>
+   <header>Сары-Ой</header>
+
+  <section class="catalog3">
+    <div class="card3">
+      <img src="ромаш.webp" alt="Платье">
+      <h3>Мята горная</h3>
+      <p>ароматное лечебное растение. Полезна для пищеварения и дыхательных органов, успокаивает.
+</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card3">
+      <img src="шалфей.webp" alt="Куртка">
+      <h3>шалфей</h3>
+      <p>лекарственное растение, полезное при кашле и боли в горле.</p>
+      <  <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card3">
+      <img src="ромашка.webp" alt="Футболка">
+      <h3>Ромашка альпийская</h3>
+      <p>обладает лечебными свойствами, успокаивает и противовоспалительна.
+</p>
+        <button><a href="ars.html">Купить</a></button>
+    </div>
+
+    <div class="card3">
+      <img src="malina.webp" alt="Юбка">
+      <h3>Малина</h3>
+      <p>Малина — вкусная ягода с полезными свойствами</p>
+       <button><a href="ars.html">Купить</a></button>
+    </div>
+  </section>
+</body>
+</html>
